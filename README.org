@@ -1,3 +1,5 @@
+#forked, updated to use nginx + system wide rvm correctly
+
 * Chef-solo
   Bootstrapping files for creating a Ruby on Rails server on an 
   Ubuntu 10.04 LTS machine
