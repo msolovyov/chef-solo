@@ -5,7 +5,7 @@ json="${1}"
 logfile="/root/chef-solo.log"
 
 # This runs as root on the server
-chef_binary="/usr/local/rvm/gems/ruby-1.9.2-p290/bin/chef-solo"
+chef_binary="/usr/local/rvm/gems/ruby-1.9.3-p0/bin/chef-solo"
 
 
 # Are we on a vanilla system?
@@ -32,8 +32,8 @@ EOP
 
      # Install Ruby using RVM
      [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
-     rvm install 1.9.2-p290
-     rvm use 1.9.2-p290 --default
+     rvm install ruby-1.9.3-p0
+     rvm use ruby-1.9.3-p0 --default
 
      # Upgrade rubygems (Latest version 1.8.10 has a lot of problems)
      # Use 'bundle exec' in front of everything
