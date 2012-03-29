@@ -1,0 +1,52 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    bluepill (1.0.4)
+    runit (0.15.0)
+    yum (0.5.2)
+
+GIT
+  remote: git://github.com/fnichol/chef-rvm.git
+  ref: master
+  sha: 39390a4a1b92ea2785d2155525a5e276e3b677e3
+  specs:
+    rvm (0.8.7)
+
+GIT
+  remote: https://github.com/opscode/cookbooks
+  ref: master
+  sha: 9948e1d00148766b7f2cc5d8690bd0b40382a314
+  specs:
+    build-essential (1.0.0)
+    couchdb (1.0.0)
+      erlang (>= 0.0.0)
+    erlang (1.0.0)
+      yum (>= 0.5.0)
+    git (0.10.0)
+      runit (>= 0.0.0)
+      yum (>= 0.0.0)
+    nginx (0.100.2)
+      bluepill (>= 0.0.0)
+      build-essential (>= 0.0.0)
+      runit (>= 0.0.0)
+    unicorn (1.0.0)
+
+GIT
+  remote: https://github.com/scalarium/example-cookbooks
+  ref: master
+  sha: e35b57a943a29cc5ddba620737d15c77dab94e94
+  specs:
+    redis (0.1.0)
+    wkhtmltopdf (0.1.0)
+
+DEPENDENCIES
+  build-essential (>= 0)
+  couchdb (>= 0)
+  erlang (>= 0)
+  git (>= 0)
+  nginx (>= 0)
+  redis (>= 0)
+  rvm (>= 0)
+  unicorn (>= 0)
+  wkhtmltopdf (>= 0)
+
