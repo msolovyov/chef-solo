@@ -18,7 +18,7 @@ cookbook 'redis',
 cookbook 'unicorn',
   :git => 'https://github.com/opscode/cookbooks'
 cookbook 'wkhtmltopdf',
-  :git => 'https://github.com/scalarium/example-cookbooks'
+  :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
 # cookbook 'chef-client'

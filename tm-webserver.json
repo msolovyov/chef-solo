@@ -3,7 +3,6 @@
   "dbpass": "mypasswd",
   "run_list": [
     "role[tm_web_server]",
-    "recipe[redis]",
     "recipe[couchdb]",
     "recipe[git]",
     "recipe[wkhtmltopdf]"

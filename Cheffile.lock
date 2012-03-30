@@ -13,6 +13,13 @@ GIT
     rvm (0.8.7)
 
 GIT
+  remote: https://github.com/Nextfave/cookbooks.git
+  ref: master
+  sha: e119b874fc172d82f5d95132b5e00a4edd0a3ee8
+  specs:
+    wkhtmltopdf (0.1.0)
+
+GIT
   remote: https://github.com/opscode/cookbooks
   ref: master
   sha: 9948e1d00148766b7f2cc5d8690bd0b40382a314
@@ -37,7 +44,6 @@ GIT
   sha: e35b57a943a29cc5ddba620737d15c77dab94e94
   specs:
     redis (0.1.0)
-    wkhtmltopdf (0.1.0)
 
 DEPENDENCIES
   build-essential (>= 0)
