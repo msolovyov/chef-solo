@@ -24,7 +24,7 @@ if ! test -f "$chef_binary"; then
      # Note system-wide installs are not in the RVM main version
      sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
      sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
-     #bash <( curl -L https://github.com/wayneeseguin/rvm/raw/1.3.0/contrib/install-system-wide ) --version '1.3.0'
+     
      (cat <<'EOP'
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
 EOP
@@ -35,11 +35,7 @@ EOP
      rvm install ruby-1.9.3-p0
      rvm use ruby-1.9.3-p0 --default
 
-     # Upgrade rubygems (Latest version 1.8.10 has a lot of problems)
-     # Use 'bundle exec' in front of everything
-     # 1.7.2 - is suggested but I've found issues with this as well.
-     # 1.6.2 - is what I use on my dev box and comes with rvm install
-     # gem update --system
+
      
      # Install chef
      gem install --no-rdoc --no-ri chef --version 0.10.0
