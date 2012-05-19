@@ -1,0 +1,8 @@
+check process unicorn_worker_5000
+  with pidfile /var/run/unicorn/unicorn.5000.pid
+  start program = "/bin/true"
+  stop program = "/etc/init.d/unicorn kill_worker 5000"
+  if mem is greater than 300.0 MB for 1 cycles then restart
+  if cpu is greater than 80% for 3 cycles then restart
+
+  group unicorn_workers

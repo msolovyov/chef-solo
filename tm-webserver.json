@@ -5,7 +5,10 @@
     "role[tm_web_server]",
     "recipe[couchdb]",
     "recipe[git]",
-    "recipe[wkhtmltopdf]"
+    "recipe[wkhtmltopdf]",
+    "recipe[monit]",
+    "recipe[monit-nginx]",
+    "recipe[monit-unicorn]"
   ]
 }
 
