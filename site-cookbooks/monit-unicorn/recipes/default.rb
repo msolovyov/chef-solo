@@ -42,4 +42,11 @@ template "/etc/monit/conf.d/unicorn.conf" do
   notifies :restart, resources(:service => "monit"), :delayed
 end
 
+template "/etc/monit/conf.d/unicorn_worker.conf" do
+  owner "root"
+  group "root"
+  mode 0700
+  source 'unicorn_worker.conf.erb'
+  notifies :restart, resources(:service => "monit"), :delayed
+end
 

@@ -21,3 +21,8 @@ attribute "unicorn/max_memory",
   :type => "string",
   :required => "recommended"
   
+
+attribute "unicorn/workers",
+  :description => 'Numbers of unicorn workers configured to start. Must match the number in config/unicorn.rb',
+  :type => "string",
+  :required => "recommended"
