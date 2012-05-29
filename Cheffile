@@ -21,9 +21,10 @@ cookbook 'wkhtmltopdf',
   :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
+
 # cookbook 'chef-client'
 
-# cookbook 'apache2', '>= 1.0.0'
+cookbook 'apache2', '>= 1.0.0'
 
 # cookbook 'rvm',
 #   :git => 'https://github.com/fnichol/chef-rvm'
