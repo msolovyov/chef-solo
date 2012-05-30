@@ -1,6 +1,7 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    apache2 (1.1.8)
     bluepill (1.0.4)
     java (1.5.0)
     runit (0.15.0)
@@ -30,6 +31,13 @@ GIT
     wkhtmltopdf (0.1.0)
 
 GIT
+  remote: https://github.com/apsoto/monit
+  ref: master
+  sha: 93b7314ecfe766e2140ccec7b3df12959d91ef7c
+  specs:
+    monit (0.7.0)
+
+GIT
   remote: https://github.com/opscode/cookbooks
   ref: master
   sha: 9948e1d00148766b7f2cc5d8690bd0b40382a314
@@ -56,11 +64,13 @@ GIT
     redis (0.1.0)
 
 DEPENDENCIES
+  apache2 (>= 1.0.0)
   build-essential (>= 0)
   couchdb (>= 0)
   elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
+  monit (>= 0)
   nginx (>= 0)
   redis (>= 0)
   rvm (>= 0)

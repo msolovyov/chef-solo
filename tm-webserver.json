@@ -6,7 +6,10 @@
     "recipe[couchdb]",
     "recipe[git]",
     "recipe[wkhtmltopdf]",
-    "recipe[elasticsearch]"
+    "recipe[elasticsearch]",
+    "recipe[monit]",
+    "recipe[monit-nginx]",
+    "recipe[monit-unicorn]"
   ]
 }
 
