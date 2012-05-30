@@ -21,6 +21,9 @@ cookbook 'wkhtmltopdf',
   :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
+cookbook 'elasticsearch',
+  :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
+
 # cookbook 'chef-client'
 
 # cookbook 'apache2', '>= 1.0.0'

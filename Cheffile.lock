@@ -2,6 +2,7 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     bluepill (1.0.4)
+    java (1.5.0)
     runit (0.15.0)
     yum (0.5.2)
 
@@ -11,6 +12,15 @@ GIT
   sha: 39390a4a1b92ea2785d2155525a5e276e3b677e3
   specs:
     rvm (0.8.7)
+
+GIT
+  remote: git://github.com/gosquared/elasticsearch-cookbook.git
+  ref: master
+  sha: bd470ecf6011bb6d777d38fce248f97cdc31da97
+  specs:
+    elasticsearch (0.18.4)
+      build-essential (>= 0.0.0)
+      java (>= 0.0.0)
 
 GIT
   remote: https://github.com/Nextfave/cookbooks.git
@@ -48,6 +58,7 @@ GIT
 DEPENDENCIES
   build-essential (>= 0)
   couchdb (>= 0)
+  elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
   nginx (>= 0)
