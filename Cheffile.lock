@@ -3,6 +3,8 @@ SITE
   specs:
     apache2 (1.1.8)
     bluepill (1.0.4)
+    munin (1.0.2)
+      apache2 (>= 1.0.6)
     runit (0.15.0)
     yum (0.5.2)
 
@@ -19,13 +21,6 @@ GIT
   sha: e119b874fc172d82f5d95132b5e00a4edd0a3ee8
   specs:
     wkhtmltopdf (0.1.0)
-
-GIT
-  remote: https://github.com/apsoto/monit
-  ref: master
-  sha: 93b7314ecfe766e2140ccec7b3df12959d91ef7c
-  specs:
-    monit (0.7.0)
 
 GIT
   remote: https://github.com/opscode/cookbooks
@@ -59,7 +54,7 @@ DEPENDENCIES
   couchdb (>= 0)
   erlang (>= 0)
   git (>= 0)
-  monit (>= 0)
+  munin (>= 0)
   nginx (>= 0)
   redis (>= 0)
   rvm (>= 0)

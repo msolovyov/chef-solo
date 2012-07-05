@@ -22,6 +22,8 @@ cookbook 'wkhtmltopdf',
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
 
+cookbook 'munin'
+
 # cookbook 'chef-client'
 
 cookbook 'apache2', '>= 1.0.0'
