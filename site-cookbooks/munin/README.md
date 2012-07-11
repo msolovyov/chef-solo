@@ -41,6 +41,9 @@ Attributes
 * `node['munin']['server_auth_method']` - the authentication method to use, default is openid. Any other value will use htauth basic with an htpasswd file.
 * `node['munin']['server_role']` - role of the munin server. Default is monitoring.
 * `node['munin']['docroot']` - document root for the server apache vhost. on archlinux, the default is `/srv/http/munin`, or `/var/www/munin` on other platforms.
+* `node['munin']['http_server']` - HTTP server used to serve Munin pages. Can be 'nginx' or 'apache2'
+
+
 
 Recipes
 =======

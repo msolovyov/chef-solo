@@ -16,17 +16,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-node['apache']['default_modules'] << 'expires' if platform?("redhat", "centos", "scientific", "fedora")
 
-include_recipe "apache2"
-include_recipe "apache2::mod_rewrite"
-include_recipe "munin::client"
 
+case node['munin']['http_server']
+when 'apache2'
+  include_recipe "apache2"
+  include_recipe "apache2::mod_rewrite"
+  node['apache']['default_modules'] << 'expires' if platform?("redhat", "centos", "scientific", "fedora")
+when 'nginx'
+  include_recipe "nginx"
+end
+# include_recipe "munin::client"
+
+# TODO Chef server
 # sysadmins = search(:users, 'groups:sysadmin')
 sysadmins = []
+# TODO Chef server
 # munin_servers = search(:node, "munin:[* TO *] AND chef_environment:#{node.chef_environment}")
 
- munin_servers = [node]
+munin_servers = [node]
 
 if munin_servers.empty?
   Chef::Log.info("No nodes returned from search, using this node so munin configuration has data")
@@ -84,31 +92,45 @@ template "#{node['munin']['basedir']}/munin.conf" do
   variables(:munin_nodes => munin_servers, :docroot => node['munin']['docroot'])
 end
 
-case node['munin']['server_auth_method']
-when "openid"
-  include_recipe "apache2::mod_auth_openid"
-else
-  template "#{node['munin']['basedir']}/htpasswd.users" do
-    source "htpasswd.users.erb"
-    owner "munin"
-    group node['apache']['group']
-    mode 0640
-    variables(
-      :sysadmins => sysadmins
-    )
+case node['munin']['http_server'] 
+when 'apache'
+
+  case node['munin']['server_auth_method']
+  when "openid"
+    include_recipe "apache2::mod_auth_openid"
+  else
+    template "#{node['munin']['basedir']}/htpasswd.users" do
+      source "htpasswd.users.erb"
+      owner "munin"
+      group node['apache']['group']
+      mode 0640
+      variables(
+                :sysadmins => sysadmins
+                )
+    end
   end
-end
 
-apache_site "000-default" do
-  enable false
-end
+  apache_site "000-default" do
+    enable false
+  end
 
-template "#{node[:apache][:dir]}/sites-available/munin.conf" do
-  source "apache2.conf.erb"
-  mode 0644
-  variables(:public_domain => public_domain, :docroot => node['munin']['docroot'])
-  if ::File.symlink?("#{node[:apache][:dir]}/sites-enabled/munin.conf")
-    notifies :reload, resources(:service => "apache2")
+  template "#{node[:apache][:dir]}/sites-available/munin.conf" do
+    source "apache2.conf.erb"
+    mode 0644
+    variables(:public_domain => public_domain, :docroot => node['munin']['docroot'])
+    if ::File.symlink?("#{node[:apache][:dir]}/sites-enabled/munin")
+      notifies :reload, resources(:service => "apache2")
+    end
+  end
+when 'nginx'
+  # TODO - DK not tested
+  template "#{node[:nginx][:dir]}/sites-available/munin" do
+    source "nginx.conf.erb"
+    mode 0644
+    variables(:public_domain => public_domain, :docroot => node['munin']['docroot'])
+    if ::File.symlink?("#{node[:nginx][:dir]}/sites-enabled/munin")
+      notifies :reload, resources(:service => "nginx")
+    end
   end
 end
 
@@ -118,4 +140,10 @@ directory node['munin']['docroot'] do
   mode 0755
 end
 
-apache_site "munin.conf"
+case node['munin']['http_server']
+when 'apache2'
+  apache_site "munin.conf"
+when 'nginx'
+  nginx_site "munin"
+end
+
