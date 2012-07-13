@@ -16,16 +16,23 @@ GIT
 GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
-  sha: f8aeaa15677b4eeb7dbb28e8e2e99973c0b694d8
+  sha: 1ee8cb957d4465f6fab3fc7ba4673c29f630f364
   specs:
     munin (1.0.3)
       apache2 (>= 1.0.6)
       nginx (>= 0.0.0)
 
 GIT
+  remote: git@github.com:dmytro/unicorn-munin.git
+  ref: master
+  sha: f42abe9c3a2faf666299ba8ec2091f182589095e
+  specs:
+    unicorn-munin (0.0.1)
+
+GIT
   remote: https://github.com/Nextfave/cookbooks.git
   ref: master
-  sha: e119b874fc172d82f5d95132b5e00a4edd0a3ee8
+  sha: 4f11dc07c156d52901674c8ad12a1d88b8f49a6b
   specs:
     wkhtmltopdf (0.1.0)
 
@@ -66,5 +73,6 @@ DEPENDENCIES
   redis (>= 0)
   rvm (>= 0)
   unicorn (>= 0)
+  unicorn-munin (>= 0)
   wkhtmltopdf (>= 0)
 
