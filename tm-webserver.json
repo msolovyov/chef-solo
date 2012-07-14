@@ -15,7 +15,9 @@
   
   "sysadmins" : 
   [
-     { "id": "munin", "htpasswd": "XXXXXXXXXXXX" }	
+     { "id":       "munin", 
+       "htpasswd": "$apr1$RY2QnENn$YgKBBaIdRTKsppcSy0fvi/" 
+      }	
   ],
 
   "dbuser": "vps",
