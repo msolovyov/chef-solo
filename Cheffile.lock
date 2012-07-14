@@ -1,8 +1,8 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apache2 (1.1.10)
-    bluepill (1.0.4)
+    apache2 (1.1.12)
+    bluepill (1.0.6)
     runit (0.15.0)
     yum (0.6.2)
 
@@ -16,18 +16,11 @@ GIT
 GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
-  sha: 1ee8cb957d4465f6fab3fc7ba4673c29f630f364
+  sha: f3da73a9d263ea03e5ae54f3c426ce13404dc75c
   specs:
     munin (1.0.3)
       apache2 (>= 1.0.6)
       nginx (>= 0.0.0)
-
-GIT
-  remote: git@github.com:dmytro/unicorn-munin.git
-  ref: master
-  sha: f42abe9c3a2faf666299ba8ec2091f182589095e
-  specs:
-    unicorn-munin (0.0.1)
 
 GIT
   remote: https://github.com/Nextfave/cookbooks.git
@@ -73,6 +66,5 @@ DEPENDENCIES
   redis (>= 0)
   rvm (>= 0)
   unicorn (>= 0)
-  unicorn-munin (>= 0)
   wkhtmltopdf (>= 0)
 
