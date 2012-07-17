@@ -1,6 +1,6 @@
 {
   "rails": {
-    "path" : "/home/ubuntu/apps/TeamMight/current"
+    "path" : "/home/ubuntu/apps/TeamMight"
   },
 
   "unicorn" : {
