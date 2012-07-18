@@ -1,4 +1,25 @@
 {
+  "rails": {
+    "path" : "/home/ubuntu/apps/TeamMight"
+  },
+
+  "unicorn" : {
+     "pid" : "/home/ubuntu/apps/TeamMight/shared/pids/unicorn.pid"
+  },
+
+  "munin" : {
+	"web_server" : "nginx",
+	"server_auth_method" : "basic",
+	"sysadmin_email" : "root@localhost"
+  },
+  
+  "sysadmins" : 
+  [
+     { "id":       "munin", 
+       "htpasswd": "$apr1$RY2QnENn$YgKBBaIdRTKsppcSy0fvi/" 
+      }	
+  ],
+
   "dbuser": "vps",
   "dbpass": "mypasswd",
   "run_list": [
@@ -9,7 +30,10 @@
     "recipe[elasticsearch]",
     "recipe[monit]",
     "recipe[monit-nginx]",
-    "recipe[monit-unicorn]"
+    "recipe[monit-unicorn]",
+    "recipe[munin::server]",
+    "recipe[munin::client]",
+    "recipe[munin::unicorn]"
   ]
 }
 
