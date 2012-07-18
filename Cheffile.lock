@@ -25,9 +25,18 @@ GIT
       java (>= 0.0.0)
 
 GIT
+  remote: git@github.com:dmytro/munin-solo.git
+  ref: master
+  sha: f3da73a9d263ea03e5ae54f3c426ce13404dc75c
+  specs:
+    munin (1.0.3)
+      apache2 (>= 1.0.6)
+      nginx (>= 0.0.0)
+
+GIT
   remote: https://github.com/Nextfave/cookbooks.git
   ref: master
-  sha: e119b874fc172d82f5d95132b5e00a4edd0a3ee8
+  sha: 4f11dc07c156d52901674c8ad12a1d88b8f49a6b
   specs:
     wkhtmltopdf (0.1.0)
 
@@ -53,7 +62,7 @@ GIT
 GIT
   remote: https://github.com/scalarium/example-cookbooks
   ref: master
-  sha: fd5483ce0335efcd8374d4d50f158d6c9df5ea1b
+  sha: 56f5f0495529dc03e6145b33d4fe677a6ee542af
   specs:
     redis (0.1.0)
 
@@ -65,6 +74,7 @@ DEPENDENCIES
   erlang (>= 0)
   git (>= 0)
   imagemagick (>= 0)
+  munin (>= 0)
   nginx (>= 0)
   redis (>= 0)
   rvm (>= 0)

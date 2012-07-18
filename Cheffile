@@ -23,7 +23,8 @@ cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
 cookbook 'elasticsearch',
   :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
-
+cookbook 'munin',
+   :git => 'git@github.com:dmytro/munin-solo.git'
 # cookbook 'chef-client'
 
 cookbook 'imagemagick'
