@@ -33,6 +33,7 @@
     "recipe[monit-unicorn]",
     "recipe[munin::server]",
     "recipe[munin::client]",
+	"recipe[imagemagick]",
     "recipe[munin::unicorn]"
   ]
 }

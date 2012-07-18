@@ -3,6 +3,7 @@ SITE
   specs:
     apache2 (1.1.8)
     bluepill (1.0.4)
+    imagemagick (0.2.2)
     java (1.5.0)
     runit (0.15.0)
     yum (0.5.2)
@@ -72,6 +73,7 @@ DEPENDENCIES
   elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
+  imagemagick (>= 0)
   munin (>= 0)
   nginx (>= 0)
   redis (>= 0)

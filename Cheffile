@@ -27,6 +27,8 @@ cookbook 'munin',
    :git => 'git@github.com:dmytro/munin-solo.git'
 # cookbook 'chef-client'
 
+cookbook 'imagemagick'
+
 cookbook 'apache2', '>= 1.0.0'
 
 # cookbook 'rvm',
