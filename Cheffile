@@ -26,6 +26,8 @@ cookbook 'elasticsearch',
 
 # cookbook 'chef-client'
 
+cookbook 'imagemagick'
+
 cookbook 'apache2', '>= 1.0.0'
 
 # cookbook 'rvm',

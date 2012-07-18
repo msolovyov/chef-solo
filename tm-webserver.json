@@ -9,7 +9,8 @@
     "recipe[elasticsearch]",
     "recipe[monit]",
     "recipe[monit-nginx]",
-    "recipe[monit-unicorn]"
+    "recipe[monit-unicorn]",
+    "recipe[imagemagick]"
   ]
 }
 
