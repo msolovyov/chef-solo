@@ -16,7 +16,7 @@ GIT
 GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
-  sha: f3da73a9d263ea03e5ae54f3c426ce13404dc75c
+  sha: c2b56dafc99f4767ceac55e59f5779c6b43d9b26
   specs:
     munin (1.0.3)
       apache2 (>= 1.0.6)
