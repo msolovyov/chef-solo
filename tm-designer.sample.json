@@ -1,0 +1,39 @@
+{
+    "rails": {
+        "path" : "/home/ubuntu/apps/TeamMight"
+    },
+
+    "unicorn" : {
+        "pid" : "/home/ubuntu/apps/TeamMight/shared/pids/unicorn.pid"
+    },
+
+    "vsftpd" : { "ssl_certs_basename" : "swiftlaunch.com" },
+
+    "git_committer" : {
+        "node" : { "config" : 
+                   { "ubuntu" :
+                     { "directory" : "/home/ubuntu/test",
+                       "identity" : "~/.ssh/git_committer",
+                       "github" : { 
+                           "repository " : "git@github.com:Nextfave/TeamMight.git",
+                           "user" : "",
+                           "password" : "",
+                           "create_key" : true,
+                           "branch" : "",
+                           "setup_branch" : true
+                       }         
+                     }
+                   }
+                 }
+    },
+    
+    "run_list": [
+        "role[tm_web_server]",
+        "recipe[couchdb]",
+        "recipe[git]",
+        "recipe[wkhtmltopdf]",
+        "recipe[git_committer]",
+        "recipe[vsftpd]",
+        "recipe[teammight]"
+    ]
+}

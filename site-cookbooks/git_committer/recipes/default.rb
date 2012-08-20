@@ -45,10 +45,71 @@ cron "commit" do
   command "#{path}/git_committer"
 end
 
-cookbook_file "#{path}/config/git_committer.yml" do 
-  owner node[:git_committer][:user]
-  source "git_committer.yml"
+if node[:git_committer][:node][:config]
+  template "#{path}/config/git_committer.yml" do 
+    source "git_committer.yml.erb"
+    variables({ :users => node[:git_committer][:node][:config] })
+  end
+  #
+  # Githup keys setup. Only when config is provided, not when using
+  # config file from recipe
+  #
+  node[:git_committer][:node][:config].each do |user,config|
+    if config.has_key? :github
+
+      if config[:github][:create_key]
+
+        identity   = File.expand_path config[:identity]
+        url        = 'https://api.github.com/user/keys'
+        
+        directory  File.expand_path("~#{user}/.ssh") do
+          owner user
+          group user
+          mode 0700
+          action :create
+          recursive true
+        end
+
+
+
+# TODO: How to make this work?
+#
+#         execute :ssh_key_upload do 
+#           require 'json'
+#           command "curl -X POST -L --user #{config[:github][:user]}:#{config[:github][:password]} #{url} --data '#{$data}'"
+#           action :nothing
+#           only_if do 
+#             $data = {
+#               "title" => "git committer #{user}@#{node.hostname}",
+#               "key"   => %x{ cat #{identity}.pub }
+# #              "key" => File.read "#{identity}.pub"
+#             }.to_json
+#             true
+#           end
+#         end
+
+        execute :ssh_keygen do
+          key_title = "git committer key #{user}@#{node.hostname}"
+          command <<-EOCMD
+             ssh-keygen -f #{identity} -t dsa -N ''
+             KEY=$(cat #{identity}.pub)
+             curl -X POST -L --user #{config[:github][:user]}:#{config[:github][:password]} #{url} --data "{\\"title\\":\\"#{key_title}\\", \\"key\\":\\"$KEY\\"}"
+EOCMD
+          creates "#{identity}"
+          # not_if "test -f #{identity}"
+          action :run
+        end
+
+
+      end
+
+    end # :github
+  end
+
+else
+  cookbook_file "#{path}/config/git_committer.yml" do 
+    owner node[:git_committer][:user]
+    source "git_committer.yml"
+
+  end
 end
-
-
-
