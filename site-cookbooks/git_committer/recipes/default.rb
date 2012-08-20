@@ -71,7 +71,8 @@ if node[:git_committer][:node][:config]
         end
 
         execute :ssh_keygen do
-          key_title = "git committer key #{user}@#{node.hostname}"
+          require 'date'
+          key_title = "Git committer key #{user}@#{node.hostname} - #{DateTime.now.to_s}"
           user  user
           group user
           command <<-EOCMD
