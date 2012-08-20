@@ -11,20 +11,20 @@ default.git_committer.dirname    = '.git_committer'
 #
 # This is just example. Please either write your configuration below,
 # or override it within *.json file
-default.git_committer.node.config  = \
-{ :ubuntu => # UNIX user name on the host
-  { :directory => '/home/ubuntu/test',
-    :identity => "~/.ssh/git_committer",
-    :github => { 
-      :repository  => 'git@github.com:user/repo',
-      :user => 'gihub-uer', 
-      :password => 'SECRET',
-      :create_key => true,
-      :branch => 'auto-commit-branch',
-      :setup_branch => true,
-    }
-  }
-}
+# default.git_committer.node.config  = \
+# { :ubuntu => # UNIX user name on the host
+#   { :directory => '/home/ubuntu/test',
+#     :identity => "~/.ssh/git_committer",
+#     :github => { 
+#       :repository  => 'git@github.com:user/repo',
+#       :user => 'gihub-uer', 
+#       :password => 'SECRET',
+#       :create_key => true,
+#       :branch => 'auto-commit-branch',
+#       :setup_branch => true,
+#     }
+#   }
+# }
 
 
 # default.git_committer.config.gituhub.user       = 

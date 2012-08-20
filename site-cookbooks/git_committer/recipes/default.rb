@@ -70,33 +70,16 @@ if node[:git_committer][:node][:config]
           recursive true
         end
 
-
-
-# TODO: How to make this work?
-#
-#         execute :ssh_key_upload do 
-#           require 'json'
-#           command "curl -X POST -L --user #{config[:github][:user]}:#{config[:github][:password]} #{url} --data '#{$data}'"
-#           action :nothing
-#           only_if do 
-#             $data = {
-#               "title" => "git committer #{user}@#{node.hostname}",
-#               "key"   => %x{ cat #{identity}.pub }
-# #              "key" => File.read "#{identity}.pub"
-#             }.to_json
-#             true
-#           end
-#         end
-
         execute :ssh_keygen do
           key_title = "git committer key #{user}@#{node.hostname}"
+          user  user
+          group user
           command <<-EOCMD
              ssh-keygen -f #{identity} -t dsa -N ''
              KEY=$(cat #{identity}.pub)
              curl -X POST -L --user #{config[:github][:user]}:#{config[:github][:password]} #{url} --data "{\\"title\\":\\"#{key_title}\\", \\"key\\":\\"$KEY\\"}"
 EOCMD
           creates "#{identity}"
-          # not_if "test -f #{identity}"
           action :run
         end
 
