@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # Cookbook Name:: teammight
 # Recipe:: default
@@ -19,22 +20,34 @@
 
 
 app      = node[:teammight][:app]
-
-# FIXME:
-# Assume there's only one user configured to use git_committer. 
-#
-user     = node[:git_committer][:node][:config].keys.first
+user     = node[:teammight][:user]
 home     = File.expand_path "~#{user}"
+#
+# Git committer setup done for the same user: teammight[:user]
+#
 config   = node[:git_committer][:node][:config][user]
 
 #
 # Re-use  github configuration from git_committer
-#
+# These configurations should be in sync.
 github = config[:github]
 
 src_dir  = "#{home}/#{app}"
 repo     = github[:repository]
 identity = File.expand_path config[:identity]
+
+# Create directory layout. Here we use tree like:
+# Application root:
+# .
+# ├── releases
+# └── shared
+#     ├── assets
+#     ├── bundle
+#     ├── config
+#     │   └── couchdb.yml
+#     ├── log
+#     ├── pids
+#     └── system
 
 %w{ releases  shared }.each do |dir|
   directory "#{home}/apps/#{app}/#{dir}"do 
@@ -73,12 +86,61 @@ cookbook_file "#{home}/.ssh/config" do
   backup 0
 end
 
-execute "clone_app_repo" do
+# Clone application repositorya and add branh in it for git_committer.
+#
+#  2 Actions below are chain triggered by :clone_app_repo and then by
+# :git_branch. Only at the time of clone we should run it.
+# ----------------------------------------------------------------------
+
+execute :first_push do
+  cwd src_dir
+  command "git push origin #{node[:teammight][:branch]}"
+  user user
+  action :nothing
+end
+
+execute :git_branch do
+  cwd src_dir
+  command "git checkout -b #{node[:teammight][:branch]}"
+  user user
+  action :nothing
+  notifies :run, resources(:execute => :first_push), :immediately
+end
+
+
+
+execute :clone_app_repo do
   cwd home
   user user
   command "test -f #{identity} && ssh-keyscan -t rsa,dsa github.com > #{home}/.ssh/known_hosts && ssh-agent /bin/bash -c 'ssh-add #{identity} && git clone #{repo} '"
   creates src_dir
   action :run
+  notifies :run, resources(:execute => :git_branch), :immediately
 end
 
+#
+# Delploy the app to localhost
+# ----------------------------------------
+# ...
 
+execute :thin_start do 
+  cwd src_dir
+  command "thin -d start"
+  user user
+  group user
+  action :nothing
+end
+
+# Capybara-webkit needs libqt4-dev
+# FIXME: 
+# http://stackoverflow.com/questions/9246786/how-can-i-get-chef-to-run-apt-get-update-before-running-other-recipes
+execute "apt-get update"
+package "libqt4-dev"
+
+execute :bundle_install do 
+  cwd src_dir
+  command "bundle install"
+  user user
+  group user
+  notifies :run, resources(:execute => :thin_start)
+end

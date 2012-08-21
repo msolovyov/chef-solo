@@ -1,3 +1,3 @@
 
-default[:teammight][:app]  = "TeamMight"
+default[:teammight][:app]  = "RailsApp"
 
