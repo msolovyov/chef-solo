@@ -7,7 +7,9 @@
         "pid" : "/home/ubuntu/apps/TeamMight/shared/pids/unicorn.pid"
     },
 
-    "vsftpd" : { "ssl_certs_basename" : "swiftlaunch.com" },
+    "vsftpd" : { "ssl_certs_basename" : "swiftlaunch.com",
+                 "chroot_users" : ["ubuntu"]
+    },
 
     "git_committer" : {
         "node" : { "config" : 
