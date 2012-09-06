@@ -20,19 +20,12 @@
       }	
   ],
 
-  "dbuser": "vps",
-  "dbpass": "mypasswd",
   "run_list": [
     "role[tm_web_server]",
+    "role[monitoring]",
     "recipe[couchdb]",
     "recipe[git]",
-    "recipe[wkhtmltopdf]",
-    "recipe[monit]",
-    "recipe[monit-nginx]",
-    "recipe[monit-unicorn]",
-    "recipe[munin::server]",
-    "recipe[munin::client]",
-    "recipe[munin::unicorn]"
+    "recipe[wkhtmltopdf]"
   ]
 }
 
