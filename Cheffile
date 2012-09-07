@@ -12,7 +12,11 @@ cookbook 'erlang',
 cookbook 'git',
   :git => 'https://github.com/opscode/cookbooks'
 cookbook 'nginx',
-  :git => 'https://github.com/opscode/cookbooks'
+  #:git => 'https://github.com/opscode/cookbooks'
+  # Switch to Dmytro's version of cookbook until pull request approved:
+  # https://github.com/cookbooks/nginx/pull/4
+  #
+  :git => 'git@github.com:dmytro/nginx.git'
 cookbook 'redis',
   :git => 'https://github.com/scalarium/example-cookbooks'
 cookbook 'unicorn',
@@ -25,6 +29,9 @@ cookbook 'elasticsearch',
   :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
 cookbook 'munin',
    :git => 'git@github.com:dmytro/munin-solo.git'
+cookbook 'github_keys',
+   :git => 'git@github.com:dmytro/github_keys.git'
+
 # cookbook 'chef-client'
 
 cookbook 'imagemagick'

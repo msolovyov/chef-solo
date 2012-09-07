@@ -16,6 +16,13 @@ GIT
     rvm (0.9.1)
 
 GIT
+  remote: git@github.com:dmytro/github_keys.git
+  ref: master
+  sha: 3293fd5eba4da3033cfb25140e1ee1fd59bc2f59
+  specs:
+    github_keys (0.0.1)
+
+GIT
   remote: git://github.com/gosquared/elasticsearch-cookbook.git
   ref: master
   sha: bd470ecf6011bb6d777d38fce248f97cdc31da97
@@ -74,6 +81,7 @@ DEPENDENCIES
   erlang (>= 0)
   git (>= 0)
   imagemagick (>= 0)
+  github_keys (>= 0)
   munin (>= 0)
   nginx (>= 0)
   redis (>= 0)
