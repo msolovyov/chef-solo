@@ -3,7 +3,16 @@
 json="${1}"
 
 OS=$(uname -s)
+
+#
+# Configuration: set required versions of rvm, ruby and chef
+# below. Install script will install or upgrade versions as required.
+# ----------------------------------------------------------------------
+RVM=1.5.18
 RUBY="ruby-1.9.3-p194"
+CHEF="10.14.2"
+# ----------------------------------------------------------------------
+
 
 if [ $OS == 'Darwin' ]; then
     logfile="/var/root/chef-solo.log"
@@ -19,21 +28,9 @@ else
 fi
 
 
-setup_rvm () {
-    sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-    sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
-    
-    (cat <<-'EOP'
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
-EOP
-        ) > /etc/profile.d/rvm.sh
 
-}
-
-
-# Are we on a vanilla system?
-if ! test -f "$chef_binary"; then
-
+install_rvm() {
+    # Are we on a vanilla system?
     case $OS in
         
         "Darwin")
@@ -66,7 +63,13 @@ if ! test -f "$chef_binary"; then
                     
                     apt-get install libqt4-dev libqtwebkit-dev
                     
-                    setup_rvm 
+                    sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+                    sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
+                    
+                    (cat <<-'EOP'
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
+EOP
+                        ) > /etc/profile.d/rvm.sh
                     ;; # end Ubuntu
                     
                 *) echo "Linux breed $BREED is not supported"; exit 1 ;;
@@ -79,21 +82,42 @@ if ! test -f "$chef_binary"; then
             exit 1
             ;;
     esac
-    
-    # Note system-wide installs are not in the RVM main version
-    
-    
-    
-    # Install Ruby using RVM
+}
+
+# Install Ruby using RVM
+install_ruby () {
+    # When attempting to install the same version that already exists,
+    # rvm simply prints error and exits, so it's safe to run install
+    # without checking.
     [[ -s $RVM ]] && source $RVM
     rvm install ${RUBY}
     rvm use ${RUBY} --default
     
-    # Install chef
-    gem install --no-rdoc --no-ri chef --version 0.10.0
-    gem install --no-rdoc --no-ri bundler 
-fi
+}
 
+# Install chef. Additionally to check whether binary exists, check
+# also version of chef-solo.
+# --------------------------------------------------------------------------------
+install_chef () {
+
+    if [ $(chef-solo --version 2> /dev/null | awk '{print $2}') != ${CHEF} ]; then
+        gem install --no-rdoc --no-ri chef --version ${CHEF}
+        gem install --no-rdoc --no-ri bundler 
+    fi
+
+}
+
+# --------------------------------------------------------------------------------
+# End of functions. Start main part
+# --------------------------------------------------------------------------------
+
+test -f $chef_binary ||  install_rvm 
+
+# TODO [ $(rvm --version 2>/dev/null | awk ' $1 ~ /rvm/ {print $2}') == ${RVM} ] || update_rvm
+install_ruby
+install_chef
+#
 # Run chef-solo on server
+#
 [[ -s  $RVM ]] && source $RVM
 "$chef_binary" --config solo.rb --json-attributes "$json"
