@@ -1,31 +1,38 @@
 {
-  "rails": {
-    "path" : "/home/ubuntu/apps/TeamMight"
-  },
+    "rails": {
+        "path" : "/home/ubuntu/apps/TeamMight"
+    },
 
-  "unicorn" : {
-     "pid" : "/home/ubuntu/apps/TeamMight/shared/pids/unicorn.pid"
-  },
+    "unicorn" : {
+        "pid" : "/home/ubuntu/apps/TeamMight/shared/pids/unicorn.pid"
+    },
 
-  "munin" : {
-	"web_server" : "nginx",
-	"server_auth_method" : "basic",
-	"sysadmin_email" : "root@localhost"
-  },
-  
-  "sysadmins" : 
-  [
-     { "id":       "munin", 
-       "htpasswd": "$apr1$RY2QnENn$YgKBBaIdRTKsppcSy0fvi/" 
-      }	
-  ],
+    "munin" : {
+	    "web_server" : "nginx",
+	    "server_auth_method" : "basic",
+	    "sysadmin_email" : "root@localhost"
+    },
 
-  "run_list": [
-    "role[tm_web_server]",
-    "role[monitoring]",
-    "recipe[couchdb]",
-    "recipe[git]",
-    "recipe[wkhtmltopdf]"
-  ]
+    "github_keys" : {
+        "local" : {
+            "user" : "ubuntu"
+        }
+    },                 
+
+    
+    "sysadmins" : 
+    [
+        { "id":       "munin", 
+          "htpasswd": "$apr1$RY2QnENn$YgKBBaIdRTKsppcSy0fvi/" 
+        }	
+    ],
+
+    "run_list": [
+        "role[tm_web_server]",
+        "role[monitoring]",
+        "recipe[couchdb]",
+        "recipe[git]",
+        "recipe[wkhtmltopdf]"
+    ]
 }
 
