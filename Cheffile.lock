@@ -30,11 +30,28 @@ GIT
       nginx (>= 0.0.0)
 
 GIT
+  remote: git@github.com:dmytro/nginx.git
+  ref: master
+  sha: 881bfe1bcad40956aa829d9515c3df085bc4de8e
+  specs:
+    nginx (0.99.2)
+      bluepill (>= 0.0.0)
+      build-essential (>= 0.0.0)
+      runit (>= 0.0.0)
+
+GIT
   remote: https://github.com/Nextfave/cookbooks.git
   ref: master
   sha: 4f11dc07c156d52901674c8ad12a1d88b8f49a6b
   specs:
     wkhtmltopdf (0.1.0)
+
+GIT
+  remote: https://github.com/edelight/chef-solo-search.git
+  ref: master
+  sha: 83fd5c5da1d32f53dba782cafaf8fad9f17b76a8
+  specs:
+    chef-solo-search (0.4.0)
 
 GIT
   remote: https://github.com/opscode/cookbooks
@@ -49,10 +66,6 @@ GIT
     git (0.10.0)
       runit (>= 0.0.0)
       yum (>= 0.0.0)
-    nginx (0.100.2)
-      bluepill (>= 0.0.0)
-      build-essential (>= 0.0.0)
-      runit (>= 0.0.0)
     unicorn (1.0.0)
 
 GIT
@@ -65,6 +78,7 @@ GIT
 DEPENDENCIES
   apache2 (>= 1.0.0)
   build-essential (>= 0)
+  chef-solo-search (>= 0)
   couchdb (>= 0)
   erlang (>= 0)
   git (>= 0)

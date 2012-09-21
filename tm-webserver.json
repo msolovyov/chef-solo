@@ -20,12 +20,6 @@
     },                 
 
     
-    "sysadmins" : 
-    [
-        { "id":       "munin", 
-          "htpasswd": "$apr1$RY2QnENn$YgKBBaIdRTKsppcSy0fvi/" 
-        }	
-    ],
 
     "run_list": [
         "role[tm_web_server]",
