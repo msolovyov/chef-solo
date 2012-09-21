@@ -1,10 +1,10 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apache2 (1.1.12)
-    bluepill (1.0.6)
+    apache2 (1.1.16)
+    bluepill (1.1.0)
     runit (0.15.0)
-    yum (0.6.2)
+    yum (0.8.2)
 
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
