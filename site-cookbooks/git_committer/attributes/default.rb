@@ -1,8 +1,8 @@
 
-default.git_committer.repo        = "https://github.com/dmytro/git_committer.git"
+default.git_committer.install_as    = 'root'
+default.git_committer.install_to    = '.git_committer'
 
-default.git_committer.user       = 'root'
-default.git_committer.dirname    = '.git_committer'
+default.git_committer.directory    = '~'
 
 #
 # If this is present will create config file for the node where

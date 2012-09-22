@@ -16,83 +16,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-path = File.expand_path("~#{node[:git_committer][:user]}/#{node[:git_committer][:dirname]}")
+path = File.expand_path("~#{node[:git_committer][:install_as]}/#{node[:git_committer][:install_to]}")
 
 
 directory path do
-  owner node[:git_committer][:user]
+  owner node[:git_committer][:install_as]
+  mode  '0755'
+  action :create
+  recursive true
+end
+
+directory "#{path}/config" do
+  owner node[:git_committer][:install_as]
   mode  '0755'
   action :create
 end
 
-git path do
-  repo node[:git_committer][:repo]
-  action :sync
-  reference "master"
-end
+cookbook_file "#{path}/git_committer"
+cookbook_file "#{path}/config/git_committer.sample.yml"
+
 
 cron "push" do 
   hour "0"
   minute "10"
-  user node[:git_committer][:user]
+  user node[:git_committer][:install_as]
   command "#{path}/git_committer push"
 end
 
 cron "commit" do 
   hour "*"
   minute "0"
-  user node[:git_committer][:user]
+  user node[:git_committer][:install_as]
   command "#{path}/git_committer"
 end
 
-if node[:git_committer][:node][:config]
-  template "#{path}/config/git_committer.yml" do 
-    source "git_committer.yml.erb"
-    variables({ :users => node[:git_committer][:node][:config] })
-  end
+
+template "#{path}/config/git_committer.yml" do 
+  source "git_committer.yml.erb"
   #
-  # Githup keys setup. Only when config is provided, not when using
-  # config file from recipe
-  #
-  node[:git_committer][:node][:config].each do |user,config|
-    if config.has_key? :github
-
-      if config[:github][:create_key]
-
-        identity   = File.expand_path config[:identity]
-        url        = 'https://api.github.com/user/keys'
-        
-        directory  File.expand_path("~#{user}/.ssh") do
-          owner user
-          group user
-          mode 0700
-          action :create
-          recursive true
-        end
-
-        execute :ssh_keygen do
-          require 'date'
-          key_title = "Git committer key #{user}@#{node.hostname} - #{DateTime.now.to_s}"
-          user  user
-          group user
-          command <<-EOCMD
-             ssh-keygen -f #{identity} -t dsa -N ''
-             KEY=$(cat #{identity}.pub)
-             curl -X POST -L --user #{config[:github][:user]}:#{config[:github][:password]} #{url} --data "{\\"title\\":\\"#{key_title}\\", \\"key\\":\\"$KEY\\"}"
-EOCMD
-          creates "#{identity}"
-          action :run
-        end
-
-      end
-
-    end # :github
-  end
-
-else
-  cookbook_file "#{path}/config/git_committer.yml" do 
-    owner node[:git_committer][:user]
-    source "git_committer.yml"
-
-  end
+  # Name of the user for installing github keys and committer is
+  # taken form github_keys cookbook.
+  # 
+  variables( { :user => node[:github_keys][:local][:user],
+               :identity => "~/.ssh/#{node[:github_keys][:local][:identity]}",
+               :directory => node[:git_committer][:directory]
+               
+             } )
 end
+
+include_recipe "github_keys"
