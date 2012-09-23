@@ -18,7 +18,6 @@
 #
 path = File.expand_path("~#{node[:git_committer][:install_as]}/#{node[:git_committer][:install_to]}")
 
-
 directory path do
   owner node[:git_committer][:install_as]
   mode  '0755'
@@ -36,9 +35,11 @@ cookbook_file "#{path}/git_committer"
 cookbook_file "#{path}/config/git_committer.sample.yml"
 
 
+# Randomize push'es so that they not all start at the same time, also
+# ensure that push does not happen at the same time as commit.
 cron "push" do 
-  hour "0"
-  minute "10"
+  hour rand(24)
+  minute (rand(55)+5).to_s 
   user node[:git_committer][:install_as]
   command "#{path}/git_committer push"
 end
