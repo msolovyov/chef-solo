@@ -27,8 +27,12 @@ cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
 cookbook 'munin',
    :git => 'git@github.com:dmytro/munin-solo.git'
+
+cookbook 'git_committer',
+   :git => 'git@github.com:dmytro/git_committer.git'
 cookbook 'github_keys',
    :git => 'git@github.com:dmytro/github_keys.git'
+
 cookbook 'chef-solo-search',
    :git => 'https://github.com/edelight/chef-solo-search.git'
 
