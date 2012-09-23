@@ -100,7 +100,7 @@ install_ruby () {
 # --------------------------------------------------------------------------------
 install_chef () {
 
-    if [ $(chef-solo --version 2> /dev/null | awk '{print $2}') != ${CHEF} ]; then
+    if [ "$(chef-solo --version 2> /dev/null | awk '{print $2}')" != "${CHEF}" ]; then
         gem install --no-rdoc --no-ri chef --version ${CHEF}
         gem install --no-rdoc --no-ri bundler 
     fi
