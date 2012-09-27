@@ -1,12 +1,10 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apache2 (1.1.8)
-    bluepill (1.0.4)
-    imagemagick (0.2.2)
-    java (1.5.0)
+    apache2 (1.1.16)
+    bluepill (1.1.0)
     runit (0.15.0)
-    yum (0.5.2)
+    yum (0.8.2)
 
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
@@ -16,9 +14,16 @@ GIT
     rvm (0.9.1)
 
 GIT
+  remote: git@github.com:dmytro/git_committer.git
+  ref: master
+  sha: 9ccd6626ff1c9f6fc4c2bac53cf8249ddb53e33b
+  specs:
+    git_committer (0.0.2)
+
+GIT
   remote: git@github.com:dmytro/github_keys.git
   ref: master
-  sha: 3293fd5eba4da3033cfb25140e1ee1fd59bc2f59
+  sha: ae11121e3de0b95e57d2a1c2cebf96ea8b713803
   specs:
     github_keys (0.0.1)
 
@@ -30,7 +35,6 @@ GIT
     elasticsearch (0.18.4)
       build-essential (>= 0.0.0)
       java (>= 0.0.0)
-
 GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
@@ -41,11 +45,28 @@ GIT
       nginx (>= 0.0.0)
 
 GIT
+  remote: git@github.com:dmytro/nginx.git
+  ref: master
+  sha: 881bfe1bcad40956aa829d9515c3df085bc4de8e
+  specs:
+    nginx (0.99.2)
+      bluepill (>= 0.0.0)
+      build-essential (>= 0.0.0)
+      runit (>= 0.0.0)
+
+GIT
   remote: https://github.com/Nextfave/cookbooks.git
   ref: master
   sha: 4f11dc07c156d52901674c8ad12a1d88b8f49a6b
   specs:
     wkhtmltopdf (0.1.0)
+
+GIT
+  remote: https://github.com/edelight/chef-solo-search.git
+  ref: master
+  sha: 83fd5c5da1d32f53dba782cafaf8fad9f17b76a8
+  specs:
+    chef-solo-search (0.4.0)
 
 GIT
   remote: https://github.com/opscode/cookbooks
@@ -76,11 +97,12 @@ GIT
 DEPENDENCIES
   apache2 (>= 1.0.0)
   build-essential (>= 0)
+  chef-solo-search (>= 0)
   couchdb (>= 0)
-  elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
   imagemagick (>= 0)
+  git_committer (>= 0)
   github_keys (>= 0)
   munin (>= 0)
   nginx (>= 0)
