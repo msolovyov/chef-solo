@@ -1,4 +1,5 @@
 #!/bin/bash
+# vim: set noai ts=4 sw=4:
 
 json="${1}"
 
@@ -71,7 +72,13 @@ install_rvm() {
 EOP
                         ) > /etc/profile.d/rvm.sh
                     ;; # end Ubuntu
-                    
+		        "CentOS")
+
+                    yum -y install bison gcc-c++ mhash mhash-devel mustang git
+
+                    yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
+
+		            ;; # end CentOS
                 *) echo "Linux breed $BREED is not supported"; exit 1 ;;
             esac
 
