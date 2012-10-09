@@ -3,8 +3,20 @@ SITE
   specs:
     apache2 (1.1.16)
     bluepill (1.1.0)
+    imagemagick (0.2.2)
+    java (1.6.0)
     runit (0.15.0)
-    yum (0.8.2)
+    yum (1.0.0)
+
+GIT
+  remote: git://github.com/dmytro/nginx.git
+  ref: master
+  sha: 881bfe1bcad40956aa829d9515c3df085bc4de8e
+  specs:
+    nginx (0.99.2)
+      bluepill (>= 0.0.0)
+      build-essential (>= 0.0.0)
+      runit (>= 0.0.0)
 
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
@@ -12,6 +24,15 @@ GIT
   sha: 6411f1194c2f57dc2578e87d9ca89199561512dd
   specs:
     rvm (0.9.1)
+
+GIT
+  remote: git://github.com/gosquared/elasticsearch-cookbook.git
+  ref: master
+  sha: bd470ecf6011bb6d777d38fce248f97cdc31da97
+  specs:
+    elasticsearch (0.18.4)
+      build-essential (>= 0.0.0)
+      java (>= 0.0.0)
 
 GIT
   remote: git@github.com:dmytro/git_committer.git
@@ -28,14 +49,6 @@ GIT
     github_keys (0.0.1)
 
 GIT
-  remote: git://github.com/gosquared/elasticsearch-cookbook.git
-  ref: master
-  sha: bd470ecf6011bb6d777d38fce248f97cdc31da97
-  specs:
-    elasticsearch (0.18.4)
-      build-essential (>= 0.0.0)
-      java (>= 0.0.0)
-GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
   sha: c2b56dafc99f4767ceac55e59f5779c6b43d9b26
@@ -43,16 +56,6 @@ GIT
     munin (1.0.3)
       apache2 (>= 1.0.6)
       nginx (>= 0.0.0)
-
-GIT
-  remote: git@github.com:dmytro/nginx.git
-  ref: master
-  sha: 881bfe1bcad40956aa829d9515c3df085bc4de8e
-  specs:
-    nginx (0.99.2)
-      bluepill (>= 0.0.0)
-      build-essential (>= 0.0.0)
-      runit (>= 0.0.0)
 
 GIT
   remote: https://github.com/Nextfave/cookbooks.git
@@ -81,16 +84,12 @@ GIT
     git (0.10.0)
       runit (>= 0.0.0)
       yum (>= 0.0.0)
-    nginx (0.100.2)
-      bluepill (>= 0.0.0)
-      build-essential (>= 0.0.0)
-      runit (>= 0.0.0)
     unicorn (1.0.0)
 
 GIT
   remote: https://github.com/scalarium/example-cookbooks
   ref: master
-  sha: 56f5f0495529dc03e6145b33d4fe677a6ee542af
+  sha: b15d00c9b00b5f2369c722851fd6146c157bda58
   specs:
     redis (0.1.0)
 
@@ -99,11 +98,12 @@ DEPENDENCIES
   build-essential (>= 0)
   chef-solo-search (>= 0)
   couchdb (>= 0)
+  elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
-  imagemagick (>= 0)
   git_committer (>= 0)
   github_keys (>= 0)
+  imagemagick (>= 0)
   munin (>= 0)
   nginx (>= 0)
   redis (>= 0)

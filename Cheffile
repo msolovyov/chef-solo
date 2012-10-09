@@ -16,7 +16,7 @@ cookbook 'nginx',
   # Switch to Dmytro's version of cookbook until pull request approved:
   # https://github.com/cookbooks/nginx/pull/4
   #
-  :git => 'git@github.com:dmytro/nginx.git'
+  :git => 'git://github.com/dmytro/nginx.git'
 cookbook 'redis',
   :git => 'https://github.com/scalarium/example-cookbooks'
 cookbook 'unicorn',
