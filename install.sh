@@ -78,6 +78,12 @@ EOP
 
                     yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
 
+                    sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+                    
+                    (cat <<-'EOP'
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
+EOP
+                        ) > /etc/profile.d/rvm.sh
 		            ;; # end CentOS
                 *) echo "Linux breed $BREED is not supported"; exit 1 ;;
             esac
