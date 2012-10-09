@@ -12,6 +12,24 @@
     },
 
     "git_committer" : {
+        "user" : {
+            "name": "ubuntu",
+            "config" : {
+                { "directory" : "/home/ubuntu/test",
+                  "identity" : "~/.ssh/git_committer",
+                  "github" : { 
+                      "repository " : "git@github.com:Nextfave/TeamMight.git",
+                      "user" : "",
+                      "password" : "",
+                      "create_key" : true,
+                      "branch" : "",
+                      "setup_branch" : true
+                  }         
+                }
+
+
+
+        
         "node" : { "config" : 
                    { "ubuntu" :
                      { "directory" : "/home/ubuntu/test",
