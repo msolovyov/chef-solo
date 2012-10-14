@@ -52,7 +52,7 @@ install_rvm() {
             
             case $BREED in
                 
-                "Ubuntu")
+                "Ubuntu"|"Debian")
                     export DEBIAN_FRONTEND=noninteractive
                     
                     # Upgrade headlessly (this is only safe-ish on vanilla systems)
@@ -72,7 +72,7 @@ install_rvm() {
 EOP
                         ) > /etc/profile.d/rvm.sh
                     ;; # end Ubuntu
-		        "CentOS")
+		        "CentOS"|"RedHat")
 
                     yum -y install bison gcc-c++ mhash mhash-devel mustang git
 
