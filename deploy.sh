@@ -24,9 +24,14 @@ echo 'keygen'
 ssh-keygen -R "${host#*@}" 2> /dev/null
 
 echo 'copy chef dir & run install.sh'
-tar cj . | ssh -o 'StrictHostKeyChecking no' "$host" "
-sudo rm -rf ~/chef &&
-mkdir ~/chef &&
-cd ~/chef &&
-tar xj &&
-sudo bash install.sh $json"
+RSYNC_RSH="ssh -o 'StrictHostKeyChecking no'" rsync -ad . ${host}:~/chef
+ssh -o 'StrictHostKeyChecking no' "$host" " cd ~/chef && sudo bash install.sh $json"
+
+
+# echo 'copy chef dir & run install.sh'
+# tar cj . | ssh -o 'StrictHostKeyChecking no' "$host" "
+# sudo rm -rf ~/chef &&
+# mkdir ~/chef &&
+# cd ~/chef &&
+# tar xj &&
+# sudo bash install.sh $json"
