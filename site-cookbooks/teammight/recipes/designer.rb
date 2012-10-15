@@ -51,10 +51,9 @@ end
 execute :git_branch do
   cwd src_dir
   command "git checkout -B #{node[:teammight][:branch]}  --track"
-  #  only_if  "git branch | awk -v BR='#{node[:teammight][:branch]}' '$1 ~ /\*/ && $2 == BR {exit 1}"
   user user
   action :run
-  # DK notifies :run, resources(:execute => :first_push), :immediately
+  notifies :run, resources(:execute => :first_push), :immediately
 end
 
 include_recipe "git_committer"
