@@ -4,16 +4,20 @@
 json="${1}"
 
 OS=$(uname -s)
+BITS=$(uname -m)
 
 #
 # Configuration: set required versions of rvm, ruby and chef
 # below. Install script will install or upgrade versions as required.
 # ----------------------------------------------------------------------
-RVM=1.5.18
+RVM="1.5.18"
 RUBY="ruby-1.9.3-p194"
 CHEF="10.14.2"
 # ----------------------------------------------------------------------
-
+# Config for CentOS
+#
+RPMFORGE_RELEASE="0.5.2-2"
+# ----------------------------------------------------------------------
 
 if [ $OS == 'Darwin' ]; then
     logfile="/var/root/chef-solo.log"
@@ -52,7 +56,9 @@ install_rvm() {
             
             case $BREED in
                 
+                # ----------
                 "Ubuntu"|"Debian")
+                # ----------
                     export DEBIAN_FRONTEND=noninteractive
                     
                     # Upgrade headlessly (this is only safe-ish on vanilla systems)
@@ -60,34 +66,55 @@ install_rvm() {
                     apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy dist-upgrade
                     
                     # Install RVM as root (System-wide install)
-                    apt-get install -y build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion
+                    apt-get install -y build-essential openssl libreadline6 libreadline6-dev \
+                        curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 \
+                        libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev \
+                        ncurses-dev automake libtool bison subversion
                     
                     apt-get install libqt4-dev libqtwebkit-dev
                     
-                    sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-                    sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
-                    
-                    (cat <<-'EOP'
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
-EOP
-                        ) > /etc/profile.d/rvm.sh
                     ;; # end Ubuntu
+                # ----------
 		        "CentOS"|"RedHat")
+                # ----------
+                    RELEASE="el$(lsb_release -rs | cut -c1)"
+
+                    rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
+
+                    # This is the name of RPM file 
+                    RPMFORGE=rpmforge-release-${RPMFORGE_RELEASE}.${RELEASE}.rf.${BITS}.rpm
+                    
+                    # rpm install from http://.. fails sometimes, it's
+                    # safer to dowload first, then install from file
+
+                    # Make sure wget is installed
+                    rpm -q wget > /dev/null || yum install -y wget
+                    #
+                    \rm -f /tmp/${RPMFORGE}
+                    wget http://packages.sw.be/rpmforge-release/${RPMFORGE} -O /tmp/${RPMFORGE} || exit
+                    rpm -Uhv /tmp/${RPMFORGE}
 
                     yum -y install bison gcc-c++ mhash mhash-devel mustang git
 
-                    yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison iconv-devel ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
-
-                    sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+                    ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
+                    yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel \
+                        libyaml-devel libffi-devel openssl-devel make bzip2 autoconf \
+                        automake libtool bison iconv-devel
                     
-                    (cat <<-'EOP'
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
-EOP
-                        ) > /etc/profile.d/rvm.sh
 		            ;; # end CentOS
+
+                
                 *) echo "Linux breed $BREED is not supported"; exit 1 ;;
             esac
 
+            sudo bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
+            sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
+            
+            (cat <<-'EOP'
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
+EOP
+                ) > /etc/profile.d/rvm.sh
+            
             ;; # END Linux
         
         *)
