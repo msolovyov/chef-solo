@@ -1,4 +1,3 @@
-#forked, updated to use nginx + system wide rvm correctly
 
 Chef-solo
 ----------
@@ -10,15 +9,16 @@ Requirements
 
 Blank Ubuntu 10.04 server machine with passwordless SSH access and passwordless sudo for your user.
 
-Addition by @dmytro
-====================
+Additions 
+=========
+
+by @dmytro
+
 
 ### Added support to install.sh for following OS's:
 
 * MacOS (Darwin)
-
 * Debian (Same group as Ubuntu) 
-
 * RHEL/CentOS with Rpmforge
 
 ### Tested with
@@ -38,13 +38,20 @@ Addition by @dmytro
 Running
 ----------
 
-    ./deploy <user>@<host> <json>
+```
+./deploy <user>@<host> <json>
+
+```    
     
 json - This is optional. I've put this there so you can have different server setup config files. eg: web_server.json
 
 There's empty JSON file, included now. If you need only install RVM, Ruby and Chef, run as:
-   
-   ./deploy ... empty.json
+
+```
+
+./deploy ... empty.json
+
+```
    
 
    
