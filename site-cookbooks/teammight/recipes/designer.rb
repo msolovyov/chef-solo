@@ -43,7 +43,7 @@ identity = File.expand_path "~/.ssh/#{node[:github_keys][:local][:identity]}"
 
 execute :first_push do
   cwd src_dir
-  command "git push origin #{node[:teammight][:branch]}"
+  command "ssh-agent /bin/bash -c \"ssh-add #{identity} && git push origin #{node[:teammight][:branch]}\""
   user user
   action :nothing
 end

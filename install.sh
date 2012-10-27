@@ -71,7 +71,7 @@ install_rvm() {
                         libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev \
                         ncurses-dev automake libtool bison subversion
                     
-                    apt-get install libqt4-dev libqtwebkit-dev
+                    apt-get -y install libqt4-dev libqtwebkit-dev
                     
                     ;; # end Ubuntu
                 # ----------

@@ -9,6 +9,8 @@ run_list( [
            ]
            )
 
+default_attributes "teammight" => { "app" => 'TeamMight' }
+
 override_attributes "github_keys" => {
   "local" => {
     "user" => "ubuntu",
