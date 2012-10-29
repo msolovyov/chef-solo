@@ -11,13 +11,6 @@ run_list( [
 
 default_attributes "teammight" => { "app" => 'TeamMight' }
 
-override_attributes "github_keys" => {
-  "local" => {
-    "user" => "ubuntu",
-    "identity"=> "id_dsa" 
-  }
-}                
-
 override_attributes "github"=> {
   "repository"=> "git@github.com=>dmytro/TeamMight.git"
 }
