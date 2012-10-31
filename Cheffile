@@ -16,7 +16,7 @@ cookbook 'nginx',
   # Switch to Dmytro's version of cookbook until pull request approved:
   # https://github.com/cookbooks/nginx/pull/4
   #
-  :git => 'git@github.com:dmytro/nginx.git'
+  :git => 'git://github.com/dmytro/nginx.git'
 cookbook 'redis',
   :git => 'https://github.com/scalarium/example-cookbooks'
 cookbook 'unicorn',
@@ -25,6 +25,8 @@ cookbook 'wkhtmltopdf',
   :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
+cookbook 'elasticsearch',
+  :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
 cookbook 'munin',
    :git => 'git@github.com:dmytro/munin-solo.git'
 
@@ -37,6 +39,8 @@ cookbook 'chef-solo-search',
    :git => 'https://github.com/edelight/chef-solo-search.git'
 
 # cookbook 'chef-client'
+
+cookbook 'imagemagick'
 
 cookbook 'apache2', '>= 1.0.0'
 
