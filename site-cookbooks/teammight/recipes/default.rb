@@ -30,11 +30,19 @@ repo     = node[:teammight][:repo]
 identity = File.expand_path "~/.ssh/#{node[:github_keys][:local][:identity]}"
 
 
+directory "#{home}/apps/#{app}"do 
+  owner node[:teammight][:user]
+  group node[:teammight][:user]
+  mode 0775
+  action :create
+  recursive true
+end
+
 %w{ releases  shared }.each do |dir|
   directory "#{home}/apps/#{app}/#{dir}"do 
     owner node[:teammight][:user]
     group node[:teammight][:user]
-    mode 0750
+    mode 0775
     action :create
     recursive true
   end
@@ -44,7 +52,7 @@ end
   directory "#{home}/apps/#{app}/shared/#{dir}" do 
     owner node[:teammight][:user]
     group node[:teammight][:user]
-    mode 0750
+    mode 0775
     action :create
     recursive true
   end

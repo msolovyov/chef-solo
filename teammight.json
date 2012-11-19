@@ -1,0 +1,8 @@
+{
+    "run_list": [
+        "role[tm_web_server]",
+        "recipe[teammight]"
+    ]
+
+}
+

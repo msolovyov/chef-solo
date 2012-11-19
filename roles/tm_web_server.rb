@@ -4,6 +4,7 @@ run_list( [
            "recipe[nginx]",
            "recipe[couchdb]",
            "recipe[git]",
+#           "recipe[redis::server]",
            "recipe[github_keys]",
            "recipe[wkhtmltopdf]"
            ]
