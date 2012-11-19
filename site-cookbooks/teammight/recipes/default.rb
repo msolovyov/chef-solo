@@ -66,11 +66,3 @@ cookbook_file "#{home}/apps/#{app}/shared/config/couchdb.yml" do
   backup 0
 end
 
-cookbook_file "#{home}/.ssh/config" do
-  source "ssh-config"
-  owner node[:teammight][:user]
-  group node[:teammight][:user]
-  mode 0644
-  backup 0
-end
-
