@@ -44,7 +44,7 @@ GIT
 GIT
   remote: git@github.com:dmytro/github_keys.git
   ref: master
-  sha: ae11121e3de0b95e57d2a1c2cebf96ea8b713803
+  sha: c2982e60d97bcc94a7f6f08d80110639e0e7b9d3
   specs:
     github_keys (0.0.1)
 
