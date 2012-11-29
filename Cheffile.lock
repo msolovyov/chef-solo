@@ -1,17 +1,17 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apache2 (1.1.16)
-    bluepill (1.1.0)
+    apache2 (1.3.0)
+    bluepill (2.0.0)
     imagemagick (0.2.2)
-    java (1.6.0)
-    runit (0.15.0)
-    yum (1.0.0)
+    java (1.6.4)
+    runit (0.16.0)
+    yum (2.0.2)
 
 GIT
   remote: git://github.com/dmytro/nginx.git
   ref: master
-  sha: 881bfe1bcad40956aa829d9515c3df085bc4de8e
+  sha: a14921ad565ce80654efa454c8a8dcb888d9b59e
   specs:
     nginx (0.99.2)
       bluepill (>= 0.0.0)
@@ -21,7 +21,7 @@ GIT
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
   ref: master
-  sha: 6411f1194c2f57dc2578e87d9ca89199561512dd
+  sha: d6cdb2ab93c421ca6234cbaf5548c914eba4084f
   specs:
     rvm (0.9.1)
 
@@ -44,7 +44,7 @@ GIT
 GIT
   remote: git@github.com:dmytro/github_keys.git
   ref: master
-  sha: ae11121e3de0b95e57d2a1c2cebf96ea8b713803
+  sha: 6b55ac06e224196f086c799994d491a3a21bd04e
   specs:
     github_keys (0.0.1)
 
@@ -89,7 +89,7 @@ GIT
 GIT
   remote: https://github.com/scalarium/example-cookbooks
   ref: master
-  sha: b15d00c9b00b5f2369c722851fd6146c157bda58
+  sha: 7e9899a6a43c1aa586b9be41c2a101fa7c5ff7e5
   specs:
     redis (0.1.0)
 
