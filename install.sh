@@ -10,8 +10,8 @@ BITS=$(uname -m)
 # Configuration: set required versions of rvm, ruby and chef
 # below. Install script will install or upgrade versions as required.
 # ----------------------------------------------------------------------
-RVM="1.5.18"
-RUBY="ruby-1.9.3-p194"
+RVM="1.16.8" 
+RUBY="ruby-1.9.3-p286"
 CHEF="10.14.2"
 # ----------------------------------------------------------------------
 # Config for CentOS
