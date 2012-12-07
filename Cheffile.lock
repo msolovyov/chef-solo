@@ -9,6 +9,13 @@ SITE
     yum (2.0.2)
 
 GIT
+  remote: git://github.com/ctrabold/chef-redis.git
+  ref: master
+  sha: a5686a513d5912a51a4f4cb40f708a4a31cd1707
+  specs:
+    redis (0.0.4)
+
+GIT
   remote: git://github.com/dmytro/nginx.git
   ref: master
   sha: a14921ad565ce80654efa454c8a8dcb888d9b59e
@@ -85,13 +92,6 @@ GIT
       runit (>= 0.0.0)
       yum (>= 0.0.0)
     unicorn (1.0.0)
-
-GIT
-  remote: https://github.com/scalarium/example-cookbooks
-  ref: master
-  sha: 7e9899a6a43c1aa586b9be41c2a101fa7c5ff7e5
-  specs:
-    redis (0.1.0)
 
 DEPENDENCIES
   apache2 (>= 1.0.0)

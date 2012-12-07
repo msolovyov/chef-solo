@@ -18,7 +18,8 @@ cookbook 'nginx',
   #
   :git => 'git://github.com/dmytro/nginx.git'
 cookbook 'redis',
-  :git => 'https://github.com/scalarium/example-cookbooks'
+  :git => 'git://github.com/dmytro/chef-redis.git'
+#  :git => 'https://github.com/scalarium/example-cookbooks'
 cookbook 'unicorn',
   :git => 'https://github.com/opscode/cookbooks'
 cookbook 'wkhtmltopdf',
