@@ -12,7 +12,9 @@ BITS=$(uname -m)
 # ----------------------------------------------------------------------
 RVM="1.17.8" 
 RUBY="ruby-1.9.3-p362"
-CHEF="10.14.2"
+#CHEF="10.14.2"
+CHEF="10.12.0"
+#CHEF="10.16.2"
 # ----------------------------------------------------------------------
 # Config for CentOS
 #
@@ -160,4 +162,12 @@ install_chef
 # Run chef-solo on server
 #
 [[ -s  $RVM ]] && source $RVM
+
+#
+# FIX for the moneta error
+# FATAL: LoadError: cannot load such file -- moneta/basic_file
+#
+gem uninstall moneta 
+gem install moneta --version=0.6.0 
+
 "$chef_binary" --config solo.rb --json-attributes "$json"
