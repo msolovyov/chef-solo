@@ -11,9 +11,11 @@ BITS=$(uname -m)
 # below. Install script will install or upgrade versions as required.
 # ----------------------------------------------------------------------
 RVM="1.17.8" 
-RUBY="ruby-1.9.3-p362"
+#RUBY="ruby-1.9.3-p362"
+RUBY="ruby-1.9.3-p374"
 #CHEF="10.14.2"
-CHEF="10.12.0"
+#CHEF="11.4.0"
+CHEF="10.24.0"
 #CHEF="10.16.2"
 # ----------------------------------------------------------------------
 # Config for CentOS
