@@ -5,13 +5,16 @@ SITE
     bluepill (2.0.0)
     imagemagick (0.2.2)
     java (1.6.4)
+    memcached (1.2.0)
+      runit (<= 0.16.2)
+      yum (>= 0.0.0)
     runit (0.16.0)
     yum (2.0.2)
 
 GIT
-  remote: git://github.com/ctrabold/chef-redis.git
+  remote: git://github.com/dmytro/chef-redis.git
   ref: master
-  sha: a5686a513d5912a51a4f4cb40f708a4a31cd1707
+  sha: 3fce8a5e43f8aa9e4104d22d067e8050703bf0a7
   specs:
     redis (0.0.4)
 
@@ -104,6 +107,7 @@ DEPENDENCIES
   git_committer (>= 0)
   github_keys (>= 0)
   imagemagick (>= 0)
+  memcached (>= 0)
   munin (>= 0)
   nginx (>= 0)
   redis (>= 0)
