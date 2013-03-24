@@ -1,0 +1,7 @@
+{
+    "run_list": ["role[tm_production]",
+                 "role[redis]",
+                 "role[elasticsearch]"
+                ]
+}
+
