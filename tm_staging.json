@@ -2,6 +2,10 @@
     "run_list": ["role[tm_production]",
                  "role[redis]",
                  "role[elasticsearch]"
-                ]
+                ],
+
+    "elasticsearch": {
+        "allocated_memory" : "1024m"
+    }
 }
 
