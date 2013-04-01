@@ -11,8 +11,8 @@ BITS=$(uname -m)
 # below. Install script will install or upgrade versions as required.
 # ----------------------------------------------------------------------
 RVM="1.17.8" 
-#RUBY="ruby-1.9.3-p362"
-RUBY="ruby-1.9.3-p374"
+RUBY="ruby-1.9.3-p362"
+#RUBY="ruby-1.9.3-p374"
 #CHEF="10.14.2"
 #CHEF="11.4.0"
 CHEF="10.24.0"

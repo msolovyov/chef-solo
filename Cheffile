@@ -26,8 +26,14 @@ cookbook 'wkhtmltopdf',
   :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
   :git => 'git://github.com/fnichol/chef-rvm.git'
+##
+# For Elasticsearch Java cookbook is requried
+#
+cookbook 'java',
+   :git => 'https://github.com/opscode-cookbooks/java'
 cookbook 'elasticsearch',
-  :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
+#  :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
+  :git => 'git@github.com:elasticsearch/cookbook-elasticsearch.git'
 cookbook 'munin',
    :git => 'git@github.com:dmytro/munin-solo.git'
 

@@ -2,9 +2,9 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     apache2 (1.3.0)
+    ark (0.1.0)
     bluepill (2.0.0)
     imagemagick (0.2.2)
-    java (1.6.4)
     memcached (1.2.0)
       runit (<= 0.16.2)
       yum (>= 0.0.0)
@@ -36,15 +36,6 @@ GIT
     rvm (0.9.1)
 
 GIT
-  remote: git://github.com/gosquared/elasticsearch-cookbook.git
-  ref: master
-  sha: bd470ecf6011bb6d777d38fce248f97cdc31da97
-  specs:
-    elasticsearch (0.18.4)
-      build-essential (>= 0.0.0)
-      java (>= 0.0.0)
-
-GIT
   remote: git@github.com:dmytro/git_committer.git
   ref: master
   sha: 9ccd6626ff1c9f6fc4c2bac53cf8249ddb53e33b
@@ -66,6 +57,14 @@ GIT
     munin (1.0.3)
       apache2 (>= 1.0.6)
       nginx (>= 0.0.0)
+
+GIT
+  remote: git@github.com:elasticsearch/cookbook-elasticsearch.git
+  ref: master
+  sha: 1bede846119940026d7c484bff6d1d9438f216d1
+  specs:
+    elasticsearch (0.2.7)
+      ark (>= 0.0.0)
 
 GIT
   remote: https://github.com/Nextfave/cookbooks.git
