@@ -6,17 +6,10 @@ json="${1}"
 OS=$(uname -s)
 BITS=$(uname -m)
 
-#
-# Configuration: set required versions of rvm, ruby and chef
-# below. Install script will install or upgrade versions as required.
-# ----------------------------------------------------------------------
-RVM="1.17.8" 
-RUBY="ruby-1.9.3-p362"
-#RUBY="ruby-1.9.3-p374"
-#CHEF="10.14.2"
-#CHEF="11.4.0"
-CHEF="10.24.0"
-#CHEF="10.16.2"
+# Source custom configuration from external file
+
+source install.conf
+
 # ----------------------------------------------------------------------
 # Config for CentOS
 #
@@ -73,7 +66,8 @@ install_rvm() {
                     apt-get install -y build-essential openssl libreadline6 libreadline6-dev \
                         curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 \
                         libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev \
-                        ncurses-dev automake libtool bison subversion
+                        ncurses-dev automake libtool bison subversion libgdbm-dev pkg-config \
+                        libffi-dev nodejs
                     
                     apt-get -y install libqt4-dev libqtwebkit-dev
                     
@@ -134,7 +128,7 @@ install_ruby () {
     # rvm simply prints error and exits, so it's safe to run install
     # without checking.
     [[ -s $RVM ]] && source $RVM
-    rvm install ${RUBY}
+    rvm install ${RUBY} --autolibs=enable
     rvm use ${RUBY} --default
     
 }
@@ -172,4 +166,5 @@ install_chef
 gem uninstall moneta 
 gem install moneta --version=0.6.0 
 
-"$chef_binary" --config solo.rb --json-attributes "$json"
+# https://gist.github.com/deepak/4620395#file-cannot-find-solo-rb-txt-L11
+"$chef_binary" --config $(pwd|tr -d "\n")/solo.rb --json-attributes "$json"
