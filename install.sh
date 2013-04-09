@@ -134,7 +134,7 @@ install_ruby () {
     # rvm simply prints error and exits, so it's safe to run install
     # without checking.
     [[ -s $RVM ]] && source $RVM
-    rvm install ${RUBY}
+    rvm install ${RUBY} --autolibs=enable
     rvm use ${RUBY} --default
     
 }
