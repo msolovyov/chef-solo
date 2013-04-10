@@ -163,8 +163,11 @@ install_chef
 # FIX for the moneta error
 # FATAL: LoadError: cannot load such file -- moneta/basic_file
 #
-gem uninstall moneta 
-gem install moneta --version=0.6.0 
+MONETA=$(gem list --local moneta | sed 's/moneta//' | tr -d ' \i')
+if [ $MONETA != '(0.6.0)' ]; then
+    gem uninstall moneta --all -force
+    gem install moneta --version=0.6.0
+fi
 
 # https://gist.github.com/deepak/4620395#file-cannot-find-solo-rb-txt-L11
 "$chef_binary" --config $(pwd|tr -d "\n")/solo.rb --json-attributes "$json"
