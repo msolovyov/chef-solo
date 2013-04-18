@@ -11,8 +11,8 @@ BITS=$(uname -m)
 # below. Install script will install or upgrade versions as required.
 # ----------------------------------------------------------------------
 RVM="1.17.8" 
-RUBY="ruby-1.9.3-p362"
-#RUBY="ruby-1.9.3-p374"
+#RUBY="ruby-2.0.0-p0"
+RUBY="ruby-1.9.3-p392"
 #CHEF="10.14.2"
 #CHEF="11.4.0"
 CHEF="10.24.0"
@@ -73,7 +73,7 @@ install_rvm() {
                     apt-get install -y build-essential openssl libreadline6 libreadline6-dev \
                         curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 \
                         libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev \
-                        ncurses-dev automake libtool bison subversion
+                        ncurses-dev automake libtool bison subversion libgdbm-dev pkg-config libffi-dev
                     
                     apt-get -y install libqt4-dev libqtwebkit-dev
                     
@@ -118,7 +118,6 @@ install_rvm() {
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # This loads RVM into a shell session.
 EOP
                 ) > /etc/profile.d/rvm.sh
-            
             ;; # END Linux
         
         *)
