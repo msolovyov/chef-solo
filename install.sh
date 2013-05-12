@@ -110,8 +110,8 @@ install_rvm() {
                     ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
                     yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel \
                         libyaml-devel libffi-devel openssl-devel make bzip2 autoconf \
-                        automake libtool bison iconv-devel
-
+                        automake libtool bison iconv-devel mysql-devel sqlite-devel
+                    
                     ;; # end CentOS
 
 
