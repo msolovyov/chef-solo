@@ -23,12 +23,7 @@ PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin export PATH
 source install.conf
 
 
-# ----------------------------------------------------------------------
-# Config for CentOS
-#
-RPMFORGE_RELEASE="0.5.2-2"
-# ----------------------------------------------------------------------
-
+# ------------------------------------------------------------------
 if [ ${OS} == 'Darwin' ]; then
     logfile="/var/root/chef-solo.log"
     chef_binary="${HOME}/.rvm/gems/${RUBY}/bin/chef-solo"
@@ -177,11 +172,13 @@ install_chef
 # FIX for the moneta error
 # FATAL: LoadError: cannot load such file -- moneta/basic_file
 #
-MONETA=$(gem list --local moneta | sed 's/moneta//' | tr -d ' \i')
-if [ ${MONETA} != '(0.6.0)' ]; then
-    gem uninstall moneta --all -force
-    gem install moneta --version=0.6.0
-fi
+# MONETA=$(gem list --local moneta | sed 's/moneta//' | tr -d ' \i')
+# if [ "${MONETA}" != '(0.6.0)' ]; then
+#     gem uninstall moneta --all --force
+#     gem install moneta --version=0.6.0
+# fi
+
+[[ ! -z ${RUBYGEMS} ]] && { gem update --system ${RUBYGEMS}; }
 
 # https://gist.github.com/deepak/4620395#file-cannot-find-solo-rb-txt-L11
 "${chef_binary}" --config $(pwd|tr -d "\n")/solo.rb --json-attributes "${json}"

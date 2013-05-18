@@ -3,14 +3,10 @@
 
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'build-essential',
-  :git => 'https://github.com/opscode/cookbooks'
-cookbook 'couchdb',
-  :git => 'https://github.com/opscode/cookbooks'
-cookbook 'erlang',
-  :git => 'https://github.com/opscode/cookbooks'
-cookbook 'git',
-  :git => 'https://github.com/opscode/cookbooks'
+cookbook 'build-essential'
+cookbook 'couchdb'
+cookbook 'erlang'
+cookbook 'git'
 cookbook 'nginx',
   #:git => 'https://github.com/opscode/cookbooks'
   # Switch to Dmytro's version of cookbook until pull request approved:
@@ -20,8 +16,7 @@ cookbook 'nginx',
 cookbook 'redis',
   :git => 'git://github.com/dmytro/chef-redis.git'
 #  :git => 'https://github.com/scalarium/example-cookbooks'
-cookbook 'unicorn',
-  :git => 'https://github.com/opscode/cookbooks'
+cookbook 'unicorn'
 cookbook 'wkhtmltopdf',
   :git => 'https://github.com/Nextfave/cookbooks.git'
 cookbook 'rvm',
@@ -29,8 +24,7 @@ cookbook 'rvm',
 ##
 # For Elasticsearch Java cookbook is requried
 #
-cookbook 'java',
-   :git => 'https://github.com/opscode-cookbooks/java'
+cookbook 'java'
 cookbook 'elasticsearch',
 #  :git => 'git://github.com/gosquared/elasticsearch-cookbook.git'
   :git => 'git@github.com:elasticsearch/cookbook-elasticsearch.git'
@@ -39,10 +33,10 @@ cookbook 'munin',
 
 cookbook 'git_committer',
    :git => 'git@github.com:dmytro/git_committer.git'
-cookbook 'github_keys',
+cookbook 'github_keys', '~>0.0.2',
    :git => 'git@github.com:dmytro/github_keys.git'
 
-cookbook 'chef-solo-search',
+cookbook 'chef-solo-search', '~>0.4.0',
    :git => 'https://github.com/edelight/chef-solo-search.git'
 
 # cookbook 'chef-client'

@@ -1,20 +1,44 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apache2 (1.3.0)
+    apache2 (1.6.2)
+    apt (1.9.2)
     ark (0.1.0)
-    bluepill (2.0.0)
+    bluepill (2.2.2)
+      rsyslog (>= 0.0.0)
+    build-essential (1.4.0)
+    chef_gem (0.1.0)
     chef_handler (1.1.4)
+    couchdb (2.4.0)
+      erlang (>= 0.0.0)
+      yum (>= 0.0.0)
+    dmg (1.1.0)
+    erlang (1.3.0)
+      apt (>= 1.7.0)
+      build-essential (>= 0.0.0)
+      yum (>= 0.5.0)
+    git (2.5.0)
+      build-essential (>= 0.0.0)
+      dmg (>= 0.0.0)
+      runit (>= 1.0)
+      windows (>= 0.0.0)
+      yum (>= 0.0.0)
     imagemagick (0.2.2)
-    runit (0.16.0)
-    windows (1.8.6)
+    java (1.11.4)
+      windows (>= 0.0.0)
+    rsyslog (1.6.0)
+    runit (1.1.4)
+      build-essential (>= 0.0.0)
+      yum (>= 0.0.0)
+    unicorn (1.2.2)
+    windows (1.8.10)
       chef_handler (>= 0.0.0)
-    yum (2.0.2)
+    yum (2.2.2)
 
 GIT
   remote: git://github.com/dmytro/chef-redis.git
   ref: master
-  sha: 3fce8a5e43f8aa9e4104d22d067e8050703bf0a7
+  sha: bd048ef4e397ab88edbb7974a9be3550c91eaf73
   specs:
     redis (0.0.4)
 
@@ -31,9 +55,10 @@ GIT
 GIT
   remote: git://github.com/fnichol/chef-rvm.git
   ref: master
-  sha: d6cdb2ab93c421ca6234cbaf5548c914eba4084f
+  sha: 7038fb8c518d0d7785767de215b1ae463f237973
   specs:
     rvm (0.9.1)
+      chef_gem (>= 0.0.0)
 
 GIT
   remote: git@github.com:dmytro/git_committer.git
@@ -45,14 +70,14 @@ GIT
 GIT
   remote: git@github.com:dmytro/github_keys.git
   ref: master
-  sha: c2982e60d97bcc94a7f6f08d80110639e0e7b9d3
+  sha: 65ac941221225c02d15c1910a71378f7b6769d24
   specs:
-    github_keys (0.0.1)
+    github_keys (0.0.2)
 
 GIT
   remote: git@github.com:dmytro/munin-solo.git
   ref: master
-  sha: c2b56dafc99f4767ceac55e59f5779c6b43d9b26
+  sha: 95d05e548a5fcfdcc4012c15119424a6652e0dd7
   specs:
     munin (1.0.3)
       apache2 (>= 1.0.6)
@@ -61,7 +86,7 @@ GIT
 GIT
   remote: git@github.com:elasticsearch/cookbook-elasticsearch.git
   ref: master
-  sha: 1bede846119940026d7c484bff6d1d9438f216d1
+  sha: d9aed1b198f1f7abf4840c612c382071e6418d61
   specs:
     elasticsearch (0.2.7)
       ark (>= 0.0.0)
@@ -76,43 +101,20 @@ GIT
 GIT
   remote: https://github.com/edelight/chef-solo-search.git
   ref: master
-  sha: 83fd5c5da1d32f53dba782cafaf8fad9f17b76a8
+  sha: 1f79c1d86e85aa3a2b01e15f90755cf60eb66a4f
   specs:
     chef-solo-search (0.4.0)
-
-GIT
-  remote: https://github.com/opscode-cookbooks/java
-  ref: master
-  sha: c9fe9875b2e4f764847070972b5a2559b1d72cd3
-  specs:
-    java (1.10.0)
-      windows (>= 0.0.0)
-
-GIT
-  remote: https://github.com/opscode/cookbooks
-  ref: master
-  sha: a5c066452e2ec73da20dc50e933177b31a1224bd
-  specs:
-    build-essential (1.0.0)
-    couchdb (1.0.0)
-      erlang (>= 0.0.0)
-    erlang (1.0.0)
-      yum (>= 0.5.0)
-    git (0.10.0)
-      runit (>= 0.0.0)
-      yum (>= 0.0.0)
-    unicorn (1.0.0)
 
 DEPENDENCIES
   apache2 (>= 1.0.0)
   build-essential (>= 0)
-  chef-solo-search (>= 0)
+  chef-solo-search (~> 0.4.0)
   couchdb (>= 0)
   elasticsearch (>= 0)
   erlang (>= 0)
   git (>= 0)
   git_committer (>= 0)
-  github_keys (>= 0)
+  github_keys (~> 0.0.2)
   imagemagick (>= 0)
   java (>= 0)
   munin (>= 0)
