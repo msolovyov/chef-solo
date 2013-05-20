@@ -75,9 +75,9 @@ install_rvm() {
                         curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 \
                         libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev \
                         ncurses-dev automake libtool bison subversion libgdbm-dev pkg-config \
-                        libffi-dev nodejs
+                        libffi-dev nodejs libqt4-dev libqtwebkit-dev
 
-                    apt-get -y install libqt4-dev libqtwebkit-dev
+                    sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
 
                     ;; # end Ubuntu
                 # ----------
@@ -98,9 +98,9 @@ install_rvm() {
                     #
                     \rm -f /tmp/${RPMFORGE}
                     wget http://packages.sw.be/rpmforge-release/${RPMFORGE} -O /tmp/${RPMFORGE} || exit
-                    rpm -Uhv /tmp/${RPMFORGE}
+                    rpm -Uhv /tmp/${RPMFORGE} || true
 
-                    yum -y install bison gcc-c++ mhash mhash-devel mustang git
+                    yum -y install bison gcc-c++ mhash mhash-devel mustang git 
 
                     ## NOTE: For centos >= 5.4 iconv-devel is provided by glibc
                     yum install -y gcc-c++ patch readline readline-devel zlib zlib-devel \
@@ -113,9 +113,7 @@ install_rvm() {
                 *) echo "Linux breed ${BREED} is not supported"; exit 1 ;;
             esac
 
-            sudo bash < <(curl -s \
-                https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-            sudo usermod -a -G rvm ubuntu #add the ubuntu user to the rvm group
+            curl -L https://get.rvm.io | sudo bash -s stable --ruby=${RUBY} --autolibs=enabled --auto-dotfiles
 
             (cat <<-'EOP'
 # This loads RVM into a shell session.
@@ -139,7 +137,7 @@ install_ruby () {
     # without checking.
 
     [[ -s ${RVM} ]] && source ${RVM}
-    rvm install ${RUBY} --autolibs=enable || true
+    rvm list strings | grep -E "^${RUBY}$" 2>&1 > /dev/null  || rvm install ${RUBY} --autolibs=enable || true
     rvm use ${RUBY} --default
 }
 
@@ -160,7 +158,6 @@ install_chef () {
 
 test -f ${chef_binary} ||  install_rvm
 
-# TODO [ $(rvm --version 2>/dev/null | awk ' $1 ~ /rvm/ {print $2}') == ${RVM} ] || update_rvm
 install_ruby
 install_chef
 
