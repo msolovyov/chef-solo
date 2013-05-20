@@ -9,7 +9,6 @@ json="${1:-empty.json}"
 
 OS=$(uname -s)
 BITS=$(uname -m)
-#
 # Set some defaults
 #
 RUBY=${RUBY:-"1.9.3-p392"}
@@ -120,7 +119,6 @@ install_rvm() {
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
 EOP
                 ) > /etc/profile.d/rvm.sh
-
             ;; # END Linux
 
         *)

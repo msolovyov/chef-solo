@@ -6,7 +6,8 @@ run_list( [
            "recipe[git]",
 #           "recipe[redis::server]",
            "recipe[github_keys]",
-           "recipe[wkhtmltopdf]"
+           "recipe[wkhtmltopdf]",
+	"recipe[memcached]"
            ]
            )
 

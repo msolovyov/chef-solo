@@ -45,6 +45,8 @@ cookbook 'imagemagick'
 
 cookbook 'apache2', '>= 1.0.0'
 
+cookbook 'memcached'
+
 # cookbook 'rvm',
 #   :git => 'https://github.com/fnichol/chef-rvm'
 
