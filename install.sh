@@ -3,7 +3,7 @@
 #
 # RVM fails with /usr/local/rvm/scripts/rvm: line 11: ZSH_VERSION: unbound variable
 #set -o nounset                  # exit on unset variables 
-set -o errexit                  # exit on shell error
+#set -o errexit                  # exit on shell error
 
 json="${1:-empty.json}"
 
@@ -137,7 +137,7 @@ install_ruby () {
     # without checking.
 
     [[ -s ${RVM} ]] && source ${RVM}
-    rvm list strings | grep -E "^${RUBY}$" 2>&1 > /dev/null  || rvm install ${RUBY} --autolibs=enable || true
+    rvm list strings | grep -E "^${RUBY}$" 2>&1 > /dev/null || rvm install ${RUBY} --autolibs=enable || true
     rvm use ${RUBY} --default
 }
 
@@ -150,6 +150,32 @@ install_chef () {
         gem install --no-rdoc --no-ri chef --version ${CHEF}
         gem install --no-rdoc --no-ri bundler
     fi
+
+    # FIX for the moneta error See KNOWN_PROBLEMS #3
+    local MAJOR=$(echo ${CHEF} | cut -d\. -f1)
+    if [ ${MAJOR} == 10 ]; then
+        MONETA=$(gem list --local moneta | sed 's/moneta//' | tr -d ' \i')
+        if [ "${MONETA}" != '(0.6.0)' ]; then
+            gem uninstall moneta --all --force
+            gem install moneta --version=0.6.0
+        fi
+    fi
+
+}
+
+#
+# Rubygems - as of may/2013, Rubygems need to be downgraded when used
+# with Ruby 2.x and Chef 11.
+# -----------------------------------------------------------------------------
+
+update_rubygems () {
+    if [[ ! -z ${RUBYGEMS} ]]; then 
+        local CURRENT=$(gem --version)
+        if [[ "${CURRENT}" != "${RUBYGEMS}" ]]; then
+            gem update --system ${RUBYGEMS};                   # See KNOWN_PROBLEMS #1
+            gem install --no-rdoc --no-ri json --version=1.7.7 # See KNOWN_PROBLEMS #2
+        fi
+    fi    
 }
 
 # --------------------------------------------------------------------------------
@@ -160,22 +186,11 @@ test -f ${chef_binary} ||  install_rvm
 
 install_ruby
 install_chef
+update_rubygems
 
 #
 # Run chef-solo on server
 #
 [[ -s  ${RVM} ]] && source ${RVM} || true
-#
-# FIX for the moneta error
-# FATAL: LoadError: cannot load such file -- moneta/basic_file
-#
-# MONETA=$(gem list --local moneta | sed 's/moneta//' | tr -d ' \i')
-# if [ "${MONETA}" != '(0.6.0)' ]; then
-#     gem uninstall moneta --all --force
-#     gem install moneta --version=0.6.0
-# fi
-
-[[ ! -z ${RUBYGEMS} ]] && { gem update --system ${RUBYGEMS}; }
-
 # https://gist.github.com/deepak/4620395#file-cannot-find-solo-rb-txt-L11
 "${chef_binary}" --config $(pwd|tr -d "\n")/solo.rb --json-attributes "${json}"
