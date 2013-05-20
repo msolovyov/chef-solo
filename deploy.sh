@@ -20,3 +20,9 @@ ssh-keygen -R "${host#*@}" 2> /dev/null
 echo 'copy chef dir & run install.sh'
 RSYNC_RSH="ssh -o 'StrictHostKeyChecking no'" rsync -ar --delete . ${host}:~/chef
 ssh -t -o 'StrictHostKeyChecking no' "$host" " cd ~/chef && sudo bash install.sh $json"
+
+#
+# post_cleanup: Remove confidential things that should not be left on remote system
+# ------------------------------------------------------------------
+ssh -t -o 'StrictHostKeyChecking no' "$host" " cd ~/chef && sudo rm -rf data_bags"
+
