@@ -82,7 +82,16 @@ install_rvm() {
                 # ----------
                 "CentOS"|"RedHat")
                 # ----------
-                    RELEASE="el$(lsb_release -rs | cut -c1)"
+                    if [ ! -z ${VAULT} ]; then # See conmment about VAULT in install.conf
+                        \cp -f ${VAULT} /etc/yum.repos.d
+                    fi
+
+                    which lsb_release > /dev/null
+                    if [ $? == 0  ]; then
+                        RELEASE="el$(lsb_release -rs | cut -c1)"
+                    else
+                        RELEASE="el$(head -1 /etc/issue | tr -d \"[:alpha:][:punct:][:space:]\"| cut -c1)"
+                    fi
 
                     rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
 
