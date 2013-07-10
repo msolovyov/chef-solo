@@ -36,16 +36,31 @@ else
     RVM="/usr/local/rvm/scripts/rvm"
 fi
 
+# ------------------------------------------------------------------
+# Check whether RVM installed.  
+#
+# TODO: need a better way, when running with sudo `which rvm` doesn't
+# work.
+# ------------------------------------------------------------------
+installed () {
+    if [ -x /usr/local/rvm/bin/rvm ] ; then 
+        echo 'yes'
+    else 
+        echo 'no'
+    fi
+}
 
 
-install_rvm() {
+# ------------------------------------------------------------------
+# On a newly bult system run package upgrades, install prerequisits.
+# ------------------------------------------------------------------
+bootstrap() {
     # Are we on a vanilla system?
+    test $(installed) = 'yes' && { echo ">>>>>>>> RVM installed, don't bootstrap. "; return; }
+
     case ${OS} in
 
         "Darwin")
-            # In MacOSX RVM installed as a non-root into ~/.rvm directory
-            bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
-
             #
             # Install Home brew
             #
@@ -121,13 +136,6 @@ install_rvm() {
                 *) echo "Linux breed ${BREED} is not supported"; exit 1 ;;
             esac
 
-            curl -L https://get.rvm.io | sudo bash -s stable --ruby=${RUBY} --autolibs=enabled --auto-dotfiles
-
-            (cat <<-'EOP'
-# This loads RVM into a shell session.
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
-EOP
-                ) > /etc/profile.d/rvm.sh
             ;; # END Linux
 
         *)
@@ -137,14 +145,25 @@ EOP
     esac
 }
 
+# ------------------------------------------------------------------
+#
+# Installs RVM on a system
+#
+# ------------------------------------------------------------------
+install_rvm () {
+    test $(installed) = 'yes' && { echo ">>>>>>>> RVM already installed "; return; }
+    curl -L https://get.rvm.io | sudo bash -s stable --autolibs=enabled --auto-dotfiles
+}
+
 # Install Ruby using RVM
 install_ruby () {
-    # When attempting to install the same version that already exists,
-    # rvm simply prints error and exits, so it's safe to run install
-    # without checking.
+
+    local _PATCH=''
 
     [[ -s ${RVM} ]] && source ${RVM}
-    rvm list strings | grep -E "^${RUBY}$" 2>&1 > /dev/null || rvm install ${RUBY} --autolibs=enable || true
+    [ ! -z ${RUBY_PATCH} ] && { _PATCH=" --patch ${RUBY_PATCH} "; }
+
+    rvm list strings | grep -E "^${RUBY}$" 2>&1 > /dev/null || rvm install ${RUBY} ${_PATCH} --autolibs=enable --auto-dotfiles || true
     rvm use ${RUBY} --default
 }
 
@@ -191,6 +210,8 @@ update_rubygems () {
 
 test -f ${chef_binary} ||  install_rvm
 
+bootstrap
+install_rvm
 install_ruby
 install_chef
 update_rubygems
