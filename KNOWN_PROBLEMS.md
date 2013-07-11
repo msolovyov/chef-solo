@@ -20,7 +20,7 @@ During deployment moneta 0.7.12 is pulled up from some of the dependencies (plea
 
 Rubygems - as of may/2013, Rubygems need to be downgraded when used with Ruby 2.x and Chef 11. Corresponding section added.
 
-* Ruby 2.0.0-p0, p195, Chef 11.4.4
+* Ruby 2.0.0-p0, p195, Chef 11.4.4, Rubygems 2.0.0
 * Error message:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
