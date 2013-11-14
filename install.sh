@@ -17,9 +17,13 @@ HOME=${HOME:-"/home/$(whoami)"}
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin export PATH
 
-# Source custom configuration from external file
+{
 
-source install.conf
+cd $(dirname $0)               # Make sure we always run in the script
+                               # directory
+
+source install.conf            # Source custom configuration from
+                               # external file
 
 
 # ------------------------------------------------------------------
@@ -222,3 +226,5 @@ update_rubygems
 [[ -s  ${RVM} ]] && source ${RVM} || true
 # https://gist.github.com/deepak/4620395#file-cannot-find-solo-rb-txt-L11
 "${chef_binary}" --config $(pwd|tr -d "\n")/solo.rb --json-attributes "${json}"
+
+}
