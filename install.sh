@@ -11,7 +11,7 @@ OS=$(uname -s)
 BITS=$(uname -m)
 # Set some defaults
 #
-RUBY=${RUBY:-"1.9.3-p392"}
+RUBY=${RUBY:-"ruby-1.9.3-p547-falcon"}
 CHEF=${CHEF:-"10.24.0"}
 HOME=${HOME:-"/home/$(whoami)"}
 
