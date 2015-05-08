@@ -2,7 +2,7 @@ name "web_server"
 description "Builds a web server for Rails apps"
 run_list( [
            "recipe[nginx]",
-           "recipe[couchdb]",
+#           "recipe[couchdb]",
            "recipe[git]",
 #           "recipe[redis::server]",
            "recipe[github_keys]",
